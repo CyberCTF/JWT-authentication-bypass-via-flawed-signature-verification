@@ -1,46 +1,88 @@
-# 🚀 Deployment Guide
+# JWT Authentication Bypass via Flawed Signature Verification# 🚀 Deployment Guide
 
-## Overview
 
-This guide covers deployment and development setup for the JWT Authentication Bypass Challenge.
 
-## 🐳 Production Deployment
+Docker image for a cybersecurity training challenge demonstrating JWT authentication bypass vulnerabilities.## Overview
 
-### Quick Start
+
+
+## Quick StartThis guide covers deployment and development setup for the JWT Authentication Bypass Challenge.
+
+
+
+```bash## 🐳 Production Deployment
+
+docker run -d -p 3206:3206 cyberctf/jwt-authentication-bypass:latest
+
+```### Quick Start
+
 ```bash
-# From repository root
+
+**Access:** http://localhost:3206/# From repository root
+
 docker-compose up -d
 
+## Challenge Description
+
 # Verify deployment
-curl http://localhost:3206
+
+This challenge simulates a corporate asset management system with a critical JWT vulnerability. The application incorrectly accepts JWT tokens with the 'none' algorithm, allowing complete authentication bypass.curl http://localhost:3206
+
 ```
+
+## Learning Objectives
 
 ### Environment Configuration
-The production deployment uses:
-- **Image**: `cyberctf/jwt-auth-bypass:latest`
-- **Port**: 3206
-- **Environment**: Production
+
+- Understand JWT security mechanismsThe production deployment uses:
+
+- Identify 'none' algorithm vulnerabilities- **Image**: `cyberctf/jwt-auth-bypass:latest`
+
+- Practice authentication bypass techniques- **Port**: 3206
+
+- Learn privilege escalation methods- **Environment**: Production
+
 - **Persistence**: Docker volume for database
 
+## Default Credentials
+
 ### Health Checks
-The application includes health checks that verify:
-- HTTP endpoint accessibility
+
+- Employee: `mitchell.parker` / `corporate2024`The application includes health checks that verify:
+
+- Finance: `sarah.johnson` / `finance789`- HTTP endpoint accessibility
+
 - Application responsiveness
-- Container health status
 
-## 🛠️ Development Environment
+## Target- Container health status
 
-### Setup
+
+
+Bypass authentication to access the administrator panel without valid credentials.## 🛠️ Development Environment
+
+
+
+## Requirements### Setup
+
 ```bash
-cd build/deploy
-docker-compose -f docker-compose.dev.yml up
-```
 
-### Development Features
+- Dockercd build/deploy
+
+- Web browserdocker-compose -f docker-compose.dev.yml up
+
+- Basic understanding of JWT tokens```
+
+
+
+**Difficulty:** Apprentice | **Category:** Authentication | **Time:** 15-30 minutes### Development Features
+
 - **Hot Reload**: Code changes reflected immediately
-- **Debug Mode**: Enhanced error reporting
+
+---- **Debug Mode**: Enhanced error reporting
+
 - **Volume Mounting**: Live code editing
-- **Development Environment Variables**
+
+**CyberCTF - Cybersecurity Training Platform**- **Development Environment Variables**
 
 ### Local Development (No Docker)
 ```bash
