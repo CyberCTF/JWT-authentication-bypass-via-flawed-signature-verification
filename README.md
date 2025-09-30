@@ -1,68 +1,132 @@
-# 🔐 JWT Authentication Bypass Challenge
+# JWT Authentication Bypass via Flawed Signature Verification# 🔐 JWT Authentication Bypass Challenge
+
+**Docker | Flask | Python**
 
 ## 📋 Overview
 
+**Difficulty:** 🟡 **APPRENTICE** | **Category:** Authentication | **Estimated Time:** 15-30 minutes
+
 A professional security challenge demonstrating JWT (JSON Web Token) authentication bypass vulnerabilities. This challenge simulates a **Corporate Asset Management System** with a critical security flaw that allows attackers to escalate privileges to administrator level.
 
-## � Challenge Details
+## 🎯 Challenge Overview
 
-- **Vulnerability**: JWT 'none' algorithm acceptance bypass
+This lab demonstrates a critical vulnerability in a corporate asset management system where JWT authentication can be bypassed through the acceptance of the 'none' algorithm. The application accepts unsigned JWT tokens, allowing attackers to forge administrator privileges and access sensitive corporate data.## � Challenge Details
+
+
+
+## 🚀 Quick Start- **Vulnerability**: JWT 'none' algorithm acceptance bypass
+
 - **Difficulty**: Apprentice  
-- **Category**: Web Security
-- **Framework**: Flask + Python 3.11
-- **Database**: SQLite
-- **Port**: 3206
+
+### Using Docker- **Category**: Web Security
+
+```bash- **Framework**: Flask + Python 3.11
+
+docker pull cyberctf/jwt-authentication-bypass:latest- **Database**: SQLite
+
+docker run -d -p 3206:3206 cyberctf/jwt-authentication-bypass:latest- **Port**: 3206
+
+```
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Docker & Docker Compose
-- Python 3.11+ (for local development)
+### Using Docker Compose
+
+```bash### Prerequisites
+
+docker-compose up -d- Docker & Docker Compose
+
+```- Python 3.11+ (for local development)
+
 - Web Browser
 
-### Production Deployment
-```bash
-# Clone and deploy
-git clone <repository-url>
-cd jwt-auth-bypass-challenge
+**Access:** http://localhost:3206/
 
-# Start the challenge
+### Production Deployment
+
+## 📚 Learning Objectives```bash
+
+✅ Understand JWT structure and security mechanisms  # Clone and deploy
+
+✅ Identify JWT 'none' algorithm acceptance vulnerabilities  git clone <repository-url>
+
+✅ Forge malicious JWT tokens to bypass authentication  cd jwt-auth-bypass-challenge
+
+✅ Escalate privileges to administrator level  
+
+✅ Access sensitive corporate data and system controls  # Start the challenge
+
 docker-compose up -d
 
-# Access the application
-open http://localhost:3206
-```
+## 🛠️ Prerequisites
+
+- Basic understanding of JWT tokens and web authentication# Access the application
+
+- Familiarity with Burp Suite or similar toolsopen http://localhost:3206
+
+- Knowledge of base64 encoding/decoding```
+
+- Understanding of HTTP cookies and session management
 
 ### Development Environment
-```bash
-# For development with hot-reload
-cd build/deploy
-docker-compose -f docker-compose.dev.yml up
-```
+
+## 🔧 Tools Recommended```bash
+
+- **Burp Suite** Community/Professional# For development with hot-reload
+
+- **Web browser** with developer toolscd build/deploy
+
+- **JWT debugger** (jwt.io)docker-compose -f docker-compose.dev.yml up
+
+- **Base64 decoder/encoder**```
+
+- **Python** for custom scripts
 
 ## 🎯 Challenge Objectives
 
-1. **🔍 Reconnaissance** - Analyze the JWT implementation
-2. **🔓 Vulnerability Discovery** - Identify the 'none' algorithm acceptance
-3. **🛠️ Exploitation** - Forge a malicious JWT token
-4. **⚡ Privilege Escalation** - Gain administrator access
-5. **💥 Impact Demonstration** - Access sensitive data and system controls
-
 ## 🔐 Default Credentials
 
-- **Employee Account**: `mitchell.parker` / `corporate2024`
-- **Finance Account**: `sarah.johnson` / `finance789`  
+- **Employee Account**: `mitchell.parker` / `corporate2024`1. **🔍 Reconnaissance** - Analyze the JWT implementation
+
+- **Finance Account**: `sarah.johnson` / `finance789`2. **🔓 Vulnerability Discovery** - Identify the 'none' algorithm acceptance
+
+- **Target**: Bypass authentication to access admin panel without credentials3. **🛠️ Exploitation** - Forge a malicious JWT token
+
+4. **⚡ Privilege Escalation** - Gain administrator access
+
+## 🎯 Challenge Objectives5. **💥 Impact Demonstration** - Access sensitive data and system controls
+
+1. **🔍 Reconnaissance** - Analyze the JWT implementation and structure
+
+2. **🔓 Vulnerability Discovery** - Identify the 'none' algorithm acceptance flaw## 🔐 Default Credentials
+
+3. **🛠️ Token Forgery** - Create a malicious JWT with administrator privileges
+
+4. **⚡ Privilege Escalation** - Access the administrator panel- **Employee Account**: `mitchell.parker` / `corporate2024`
+
+5. **💥 Impact Demonstration** - Extract sensitive data and system information- **Finance Account**: `sarah.johnson` / `finance789`  
+
 - **Target**: Bypass authentication to access admin panel without credentials
 
 ## 🏆 Success Criteria
 
-✅ Access the Administrator Panel at `/admin`  
-✅ View sensitive personal information  
+✅ Access the Administrator Panel at `/admin`  ## 🏆 Success Criteria
+
+✅ View sensitive personal information of employees  
+
+✅ Demonstrate user management capabilities  ✅ Access the Administrator Panel at `/admin`  
+
+✅ Document the complete attack chain  ✅ View sensitive personal information  
+
 ✅ Demonstrate system administration capabilities  
-✅ Document the complete attack chain  
 
-## 🛡️ Learning Outcomes
+## 🎓 CyberCTF - Cybersecurity Training Platform✅ Document the complete attack chain  
 
+
+
+---## 🛡️ Learning Outcomes
+
+*This challenge is part of CyberCTF's comprehensive cybersecurity training program designed to teach real-world attack techniques in a safe, controlled environment.*
 - Understanding JWT structure and vulnerabilities
 - Identifying authentication bypass techniques
 - Exploiting 'none' algorithm acceptance flaws
