@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Corporate Asset Management{% endblock %}
+
+{% block content %}
+<div class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="md:flex md:items-center md:justify-between">
+            <div class="flex-1 min-w-0">
+                <h2 class="text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate">
+                    Welcome back, {{ user.sub }}
+                </h2>
+                <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
+                    <div class="mt-2 flex items-center text-sm text-gray-400">
+                        <i class="fas fa-briefcase mr-2"></i>
+                        {{ user.department }}
+                    </div>
+                    <div class="mt-2 flex items-center text-sm text-gray-400">
+                        <i class="fas fa-user-tag mr-2"></i>
+                        {{ user.role|title }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Total Assets Card -->
+                <div class="bg-gray-800 overflow-hidden shadow-lg rounded-lg border border-gray-700">
+                    <div class="p-5">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-laptop text-corporate-400 text-3xl"></i>
+                            </div>
+                            <div class="ml-5 w-0 flex-1">
+                                <dl>
+                                    <dt class="text-sm font-medium text-gray-400 truncate">
+                                        {% if user.role == 'admin' %}Total Assets{% else %}My Assets{% endif %}
+                                    </dt>
+                                    <dd class="text-lg font-medium text-white">{{ total_assets }}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if user.role == 'admin' %}
+                <!-- Total Users Card -->
+                <div class="bg-gray-800 overflow-hidden shadow-lg rounded-lg border border-gray-700">
+                    <div class="p-5">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-users text-green-400 text-3xl"></i>
+                            </div>
+                            <div class="ml-5 w-0 flex-1">
+                                <dl>
+                                    <dt class="text-sm font-medium text-gray-400 truncate">Total Users</dt>
+                                    <dd class="text-lg font-medium text-white">{{ total_users }}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Total Value Card -->
+                <div class="bg-gray-800 overflow-hidden shadow-lg rounded-lg border border-gray-700">
+                    <div class="p-5">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-dollar-sign text-yellow-400 text-3xl"></i>
+                            </div>
+                            <div class="ml-5 w-0 flex-1">
+                                <dl>
+                                    <dt class="text-sm font-medium text-gray-400 truncate">
+                                        {% if user.role == 'admin' %}Total Value{% else %}My Assets Value{% endif %}
+                                    </dt>
+                                    <dd class="text-lg font-medium text-white">${{ "%.2f"|format(total_value) }}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Assets -->
+        <div class="mt-8">
+            <div class="bg-gray-800 shadow rounded-lg border border-gray-700">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg leading-6 font-medium text-white">Recent Assets</h3>
+                    <div class="mt-5">
+                        {% if recent_assets %}
+                        <div class="overflow-hidden">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr class="border-b border-gray-700">
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Asset</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Type</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Serial</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Value</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700">
+                                    {% for asset in recent_assets %}
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{{ asset[1] }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ asset[2] }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ asset[3] }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">${{ "%.2f"|format(asset[4]) }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-800 text-green-100">
+                                                {{ asset[7] }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% else %}
+                        <p class="text-gray-400">No assets assigned to you yet.</p>
+                        {% endif %}
+                    </div>
+                    <div class="mt-5">
+                        <a href="{{ url_for('assets') }}" 
+                           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-corporate-600 hover:bg-corporate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-corporate-500">
+                            View All Assets
+                            <i class="ml-2 fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

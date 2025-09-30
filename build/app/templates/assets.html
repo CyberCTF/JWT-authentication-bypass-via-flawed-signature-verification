@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Assets - Corporate Asset Management{% endblock %}
+
+{% block content %}
+<div class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="md:flex md:items-center md:justify-between">
+            <div class="flex-1 min-w-0">
+                <h2 class="text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate">
+                    {% if user.role == 'admin' %}All Assets{% else %}My Assets{% endif %}
+                </h2>
+                <p class="mt-1 text-sm text-gray-400">
+                    {% if user.role == 'admin' %}Manage all corporate assets{% else %}View your assigned assets{% endif %}
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <div class="bg-gray-800 shadow rounded-lg border border-gray-700">
+                <div class="px-4 py-5 sm:p-6">
+                    {% if assets %}
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="border-b border-gray-700">
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Asset Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Type</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Serial Number</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Value</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Location</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Assigned To</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                {% for asset in assets %}
+                                <tr class="hover:bg-gray-750">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10">
+                                                <div class="h-10 w-10 rounded-full bg-corporate-500 flex items-center justify-center">
+                                                    {% if asset[2] == 'Computer' %}
+                                                        <i class="fas fa-laptop text-white"></i>
+                                                    {% elif asset[2] == 'Mobile Device' %}
+                                                        <i class="fas fa-mobile-alt text-white"></i>
+                                                    {% elif asset[2] == 'Server' %}
+                                                        <i class="fas fa-server text-white"></i>
+                                                    {% else %}
+                                                        <i class="fas fa-box text-white"></i>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-white">{{ asset[1] }}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ asset[2] }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 font-mono">{{ asset[3] }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">${{ "%.2f"|format(asset[4]) }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ asset[5] }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ asset[6] }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {% if asset[7] == 'active' %}
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-800 text-green-100">
+                                                Active
+                                            </span>
+                                        {% elif asset[7] == 'maintenance' %}
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-800 text-yellow-100">
+                                                Maintenance
+                                            </span>
+                                        {% else %}
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-800 text-red-100">
+                                                Inactive
+                                            </span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-12">
+                        <i class="fas fa-laptop text-gray-600 text-6xl mb-4"></i>
+                        <h3 class="text-lg font-medium text-gray-300 mb-2">No Assets Found</h3>
+                        <p class="text-gray-400">
+                            {% if user.role == 'admin' %}No assets have been registered in the system yet.{% else %}You don't have any assets assigned to you.{% endif %}
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

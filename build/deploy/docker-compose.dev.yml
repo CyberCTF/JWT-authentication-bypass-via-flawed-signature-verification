@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  jwt-challenge-app:
+    build:
+      context: ../app
+      dockerfile: Dockerfile
+    volumes:
+      - ../app:/app
+      - jwt_dev_data:/app/data
+    command: python /app/app.py
+    ports:
+      - "3206:3206"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - PYTHONPATH=/app
+    restart: unless-stopped
+
+volumes:
+  jwt_dev_data:

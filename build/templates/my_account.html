@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block title %}My Account - Corporate Asset Management{% endblock %}
+
+{% block content %}
+<div class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-corporate-600 to-corporate-800 rounded-lg p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-white">My Account</h1>
+                    <p class="text-corporate-100 mt-2">Welcome to your personal dashboard, {{ user.sub }}</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-right">
+                        <p class="text-sm text-corporate-100">Role</p>
+                        <p class="text-lg font-semibold text-white">{{ user.role|title }}</p>
+                    </div>
+                    <div class="h-12 w-12 bg-corporate-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-white text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- My Assets Count -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
+                <div class="flex items-center">
+                    <div class="p-3 bg-blue-900 rounded-lg">
+                        <i class="fas fa-laptop text-blue-300 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-400">My Assets</p>
+                        <p class="text-2xl font-bold text-white">{{ asset_count }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Value -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
+                <div class="flex items-center">
+                    <div class="p-3 bg-green-900 rounded-lg">
+                        <i class="fas fa-dollar-sign text-green-300 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-400">Total Value</p>
+                        <p class="text-2xl font-bold text-white">${{ "%.2f"|format(total_value) }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
+                <div class="flex items-center">
+                    <div class="p-3 bg-purple-900 rounded-lg">
+                        <i class="fas fa-building text-purple-300 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-400">Department</p>
+                        <p class="text-lg font-bold text-white">{{ user.department }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Information -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Profile Details -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
+                <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                    <i class="fas fa-id-card text-corporate-500 mr-3"></i>
+                    Profile Information
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                        <span class="text-gray-400">Username</span>
+                        <span class="text-white font-medium">{{ user.sub }}</span>
+                    </div>
+                    <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                        <span class="text-gray-400">Role</span>
+                        <span class="inline-flex px-3 py-1 text-sm font-semibold rounded-full bg-blue-900 text-blue-100">
+                            {{ user.role|title }}
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                        <span class="text-gray-400">Department</span>
+                        <span class="text-white font-medium">{{ user.department }}</span>
+                    </div>
+                    <div class="flex justify-between items-center py-3">
+                        <span class="text-gray-400">Account Type</span>
+                        <span class="text-green-400 font-medium">Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
+                <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                    <i class="fas fa-bolt text-yellow-500 mr-3"></i>
+                    Quick Actions
+                </h3>
+                <div class="space-y-4">
+                    <a href="{{ url_for('assets') }}" 
+                       class="block w-full bg-corporate-600 hover:bg-corporate-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center">
+                        <i class="fas fa-laptop mr-3"></i>
+                        View All My Assets
+                    </a>
+                    {% if user.role == 'admin' %}
+                    <a href="{{ url_for('admin_panel') }}" 
+                       class="block w-full bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center">
+                        <i class="fas fa-shield-alt mr-3"></i>
+                        Admin Panel
+                    </a>
+                    {% endif %}
+                    <a href="{{ url_for('dashboard') }}" 
+                       class="block w-full bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Assets -->
+        {% if assets %}
+        <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
+            <div class="px-6 py-4 border-b border-gray-700">
+                <h3 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-history text-corporate-500 mr-3"></i>
+                    My Recent Assets
+                </h3>
+            </div>
+            <div class="p-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-700">
+                                <th class="text-left py-3 px-4 text-gray-400 font-medium">Asset</th>
+                                <th class="text-left py-3 px-4 text-gray-400 font-medium">Type</th>
+                                <th class="text-left py-3 px-4 text-gray-400 font-medium">Serial Number</th>
+                                <th class="text-left py-3 px-4 text-gray-400 font-medium">Value</th>
+                                <th class="text-left py-3 px-4 text-gray-400 font-medium">Location</th>
+                                <th class="text-left py-3 px-4 text-gray-400 font-medium">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for asset in assets %}
+                            <tr class="border-b border-gray-700 hover:bg-gray-750 transition duration-200">
+                                <td class="py-4 px-4">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 bg-corporate-500 rounded-lg flex items-center justify-center mr-3">
+                                            {% if asset[2] == 'Computer' %}
+                                                <i class="fas fa-laptop text-white"></i>
+                                            {% elif asset[2] == 'Mobile Device' %}
+                                                <i class="fas fa-mobile-alt text-white"></i>
+                                            {% elif asset[2] == 'Tablet' %}
+                                                <i class="fas fa-tablet-alt text-white"></i>
+                                            {% else %}
+                                                <i class="fas fa-box text-white"></i>
+                                            {% endif %}
+                                        </div>
+                                        <span class="text-white font-medium">{{ asset[1] }}</span>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-4 text-gray-300">{{ asset[2] }}</td>
+                                <td class="py-4 px-4 text-gray-300 font-mono">{{ asset[3] }}</td>
+                                <td class="py-4 px-4 text-gray-300">${{ "%.2f"|format(asset[4]) }}</td>
+                                <td class="py-4 px-4 text-gray-300">{{ asset[5] }}</td>
+                                <td class="py-4 px-4">
+                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-900 text-green-100">
+                                        {{ asset[7] }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-6">
+                    <a href="{{ url_for('assets') }}" 
+                       class="inline-flex items-center px-4 py-2 bg-corporate-600 hover:bg-corporate-700 text-white rounded-lg transition duration-200">
+                        View All Assets
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6">
+            <div class="text-center py-12">
+                <i class="fas fa-laptop text-gray-600 text-6xl mb-4"></i>
+                <h3 class="text-xl font-medium text-gray-300 mb-2">No Assets Assigned</h3>
+                <p class="text-gray-400">You don't have any assets assigned to your account yet.</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

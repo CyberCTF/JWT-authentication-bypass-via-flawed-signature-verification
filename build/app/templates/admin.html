@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel - Corporate Asset Management{% endblock %}
+
+{% block content %}
+<div class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-red-600 to-red-800 rounded-lg p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-white flex items-center">
+                        <i class="fas fa-shield-alt mr-4"></i>
+                        Administrator Panel
+                    </h1>
+                    <p class="text-red-100 mt-2">System administration and user management</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-red-100">Logged in as</p>
+                    <p class="text-lg font-semibold text-white">{{ user.sub }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Statistics -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
+                <div class="flex items-center">
+                    <div class="p-3 bg-blue-900 rounded-lg">
+                        <i class="fas fa-users text-blue-300 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-400">Total Users</p>
+                        <p class="text-2xl font-bold text-white">{{ total_users }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
+                <div class="flex items-center">
+                    <div class="p-3 bg-green-900 rounded-lg">
+                        <i class="fas fa-laptop text-green-300 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-400">Total Assets</p>
+                        <p class="text-2xl font-bold text-white">{{ total_assets }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
+                <div class="flex items-center">
+                    <div class="p-3 bg-yellow-900 rounded-lg">
+                        <i class="fas fa-dollar-sign text-yellow-300 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-400">Asset Value</p>
+                        <p class="text-2xl font-bold text-white">${{ "%.0f"|format(total_value) }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg">
+                <div class="flex items-center">
+                    <div class="p-3 bg-purple-900 rounded-lg">
+                        <i class="fas fa-shield-alt text-purple-300 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-400">Admin Level</p>
+                        <p class="text-lg font-bold text-white">FULL</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert Banner -->
+        <div class="bg-red-900 border border-red-700 rounded-lg p-4 mb-8">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-triangle text-red-300 text-xl"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-red-100">Restricted Administrative Area</h3>
+                    <div class="mt-2 text-sm text-red-200">
+                        <p>This section provides full system administration capabilities. All actions are logged and monitored for security compliance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Administrator Personal Information Section -->
+        <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg mb-8">
+            <div class="px-6 py-4 border-b border-gray-700">
+                <h3 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-user-shield text-red-500 mr-3"></i>
+                    Administrator Personal Profile
+                    <span class="ml-auto text-xs bg-red-900 text-red-100 px-3 py-1 rounded-full">CONFIDENTIAL</span>
+                </h3>
+            </div>
+            
+            <div class="p-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Personal Information -->
+                    <div class="bg-gray-750 border border-gray-600 rounded-lg p-5">
+                        <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                            <i class="fas fa-id-card text-blue-400 mr-2"></i>
+                            Personal Details
+                        </h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span class="text-gray-400">Full Name</span>
+                                <span class="text-white font-medium">Marcus J. Wellington</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span class="text-gray-400">Personal Email</span>
+                                <span class="text-white font-medium text-red-300">marcus.wellington@personal-gmail.com</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span class="text-gray-400">Corporate Email</span>
+                                <span class="text-white font-medium">m.wellington@corporateassets.com</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span class="text-gray-400">Mobile Phone</span>
+                                <span class="text-white font-medium text-red-300">+1 (555) 847-2931</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-400">Home Address</span>
+                                <span class="text-white font-medium text-red-300">1247 Oak Ridge Lane, Beverly Hills, CA 90210</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security & Access Information -->
+                    <div class="bg-gray-750 border border-gray-600 rounded-lg p-5">
+                        <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                            <i class="fas fa-key text-yellow-400 mr-2"></i>
+                            Security Information
+                        </h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span class="text-gray-400">Employee ID</span>
+                                <span class="text-white font-medium">ADM-001-2024</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span class="text-gray-400">Security Clearance</span>
+                                <span class="text-red-300 font-medium">TOP SECRET</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span class="text-gray-400">Badge Access Code</span>
+                                <span class="text-white font-medium text-red-300">CA-7834-ADMIN</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-600">
+                                <span class="text-gray-400">Emergency Contact</span>
+                                <span class="text-white font-medium">Sarah Wellington (Wife)</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-400">Backup Recovery Email</span>
+                                <span class="text-white font-medium text-red-300">mwellington.backup@protonmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sensitive Notes Section -->
+                <div class="mt-6 bg-red-950 border border-red-800 rounded-lg p-4">
+                    <h5 class="text-sm font-semibold text-red-100 mb-3 flex items-center">
+                        <i class="fas fa-sticky-note text-red-400 mr-2"></i>
+                        Confidential Administrator Notes
+                    </h5>
+                    <div class="text-sm text-red-200 space-y-2">
+                        <p><strong>VPN Access:</strong> Server: vpn.corporateassets-internal.com | Username: m.wellington | Password: Corp2024!VPN#Secure</p>
+                        <p><strong>Database Direct Access:</strong> Host: db-master.internal | User: root_admin | Pass: DbRoot!2024$Wellington</p>
+                        <p><strong>AWS Console:</strong> Account: 847293610475 | Access Key: AKIA7XYZ9WELLINGTON | Secret: hwellington2024+AWS!secret</p>
+                        <p><strong>Personal SSN:</strong> 578-94-3265 | <strong>Bank Account:</strong> Wells Fargo #4578932145672891</p>
+                        <p><strong>Home WiFi:</strong> Wellington_Residence_5G | Password: Sarah&Marcus2019!</p>
+                    </div>
+                </div>
+
+                <!-- Warning Notice -->
+                <div class="mt-4 bg-yellow-950 border border-yellow-800 rounded-lg p-3">
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i>
+                        <span class="text-yellow-200 text-sm">
+                            <strong>WARNING:</strong> This information is strictly confidential. Unauthorized access or disclosure is prohibited and subject to legal action.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Management Section -->
+        <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
+            <div class="px-6 py-4 border-b border-gray-700">
+                <h3 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-users-cog text-corporate-500 mr-3"></i>
+                    User Management
+                    <span class="ml-auto text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full">{{ users|length }} users</span>
+                </h3>
+            </div>
+            
+            {% if users %}
+            <div class="p-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-700">
+                                <th class="text-left py-3 px-4 text-gray-400 font-medium">User</th>
+                                <th class="text-left py-3 px-4 text-gray-400 font-medium">Role</th>
+                                <th class="text-left py-3 px-4 text-gray-400 font-medium">Department</th>
+                                <th class="text-left py-3 px-4 text-gray-400 font-medium">Created</th>
+                                <th class="text-left py-3 px-4 text-gray-400 font-medium">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user_item in users %}
+                            <tr class="border-b border-gray-700 hover:bg-gray-750 transition duration-200">
+                                <td class="py-4 px-4">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 bg-corporate-500 rounded-full flex items-center justify-center mr-3">
+                                            <i class="fas fa-user text-white"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-white font-medium">{{ user_item[1] }}</div>
+                                            <div class="text-gray-400 text-sm">ID: {{ user_item[0] }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-4">
+                                    {% if user_item[3] == 'admin' %}
+                                        <span class="inline-flex px-3 py-1 text-sm font-semibold rounded-full bg-red-900 text-red-100">
+                                            <i class="fas fa-crown mr-1"></i> Administrator
+                                        </span>
+                                    {% else %}
+                                        <span class="inline-flex px-3 py-1 text-sm font-semibold rounded-full bg-blue-900 text-blue-100">
+                                            <i class="fas fa-user mr-1"></i> Employee
+                                        </span>
+                                    {% endif %}
+                                </td>
+                                <td class="py-4 px-4 text-gray-300">{{ user_item[4] or 'Not Assigned' }}</td>
+                                <td class="py-4 px-4 text-gray-300">{{ user_item[5] or 'N/A' }}</td>
+                                <td class="py-4 px-4">
+                                    {% if user_item[3] != 'admin' %}
+                                    <button onclick="deleteUser('{{ user_item[1] }}')" 
+                                           class="inline-flex items-center px-3 py-2 text-sm font-medium text-red-300 hover:text-red-100 hover:bg-red-900 rounded-lg transition duration-200">
+                                        <i class="fas fa-trash mr-2"></i>Delete
+                                    </button>
+                                    {% else %}
+                                    <span class="text-gray-500 text-sm">
+                                        <i class="fas fa-shield-alt mr-1"></i>Protected
+                                    </span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% else %}
+            <div class="p-6">
+                <div class="text-center py-12">
+                    <i class="fas fa-users text-gray-600 text-6xl mb-4"></i>
+                    <h3 class="text-xl font-medium text-gray-300 mb-2">No Users Found</h3>
+                    <p class="text-gray-400">All target users have been removed from the system.</p>
+                    
+                    <!-- Challenge Complete -->
+                    <div class="mt-6 bg-green-900 border border-green-700 rounded-lg p-4 max-w-md mx-auto">
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-trophy text-yellow-400 text-2xl mr-3"></i>
+                            <div>
+                                <h3 class="text-lg font-medium text-green-100">Challenge Completed!</h3>
+                                <p class="text-sm text-green-200">JWT bypass successful</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+function deleteUser(username) {
+    if (confirm(`Are you sure you want to delete user "${username}"? This action cannot be undone.`)) {
+        fetch(`/admin/delete?username=${encodeURIComponent(username)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Reload the page to update the user list
+                    location.reload();
+                } else {
+                    alert('Error: ' + (data.error || 'Failed to delete user'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while deleting the user');
+            });
+    }
+}
+</script>
+{% endblock %}
