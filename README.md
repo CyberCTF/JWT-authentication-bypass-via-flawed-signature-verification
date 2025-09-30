@@ -1,67 +1,130 @@
-# JWT Authentication Bypass via Flawed Signature Verification# 🔐 JWT Authentication Bypass Challenge
+# JWT Authentication Bypass via Flawed Signature Verification# JWT Authentication Bypass via Flawed Signature Verification# 🔐 JWT Authentication Bypass Challenge
+
+Docker Flask Python
 
 **Docker | Flask | Python**
 
+Difficulty: APPRENTICE | Category: Authentication | Estimated Time: 15-30 minutes
+
 ## 📋 Overview
 
-**Difficulty:** 🟡 **APPRENTICE** | **Category:** Authentication | **Estimated Time:** 15-30 minutes
+## Challenge Overview
 
-A professional security challenge demonstrating JWT (JSON Web Token) authentication bypass vulnerabilities. This challenge simulates a **Corporate Asset Management System** with a critical security flaw that allows attackers to escalate privileges to administrator level.
-
-## 🎯 Challenge Overview
-
-This lab demonstrates a critical vulnerability in a corporate asset management system where JWT authentication can be bypassed through the acceptance of the 'none' algorithm. The application accepts unsigned JWT tokens, allowing attackers to forge administrator privileges and access sensitive corporate data.## � Challenge Details
+This lab demonstrates a critical vulnerability in a corporate asset management system where JWT authentication can be bypassed through the acceptance of the 'none' algorithm. The application accepts unsigned JWT tokens, allowing attackers to forge administrator privileges and access sensitive corporate data.**Difficulty:** 🟡 **APPRENTICE** | **Category:** Authentication | **Estimated Time:** 15-30 minutes
 
 
 
-## 🚀 Quick Start- **Vulnerability**: JWT 'none' algorithm acceptance bypass
+## Quick StartA professional security challenge demonstrating JWT (JSON Web Token) authentication bypass vulnerabilities. This challenge simulates a **Corporate Asset Management System** with a critical security flaw that allows attackers to escalate privileges to administrator level.
 
-- **Difficulty**: Apprentice  
 
-### Using Docker- **Category**: Web Security
 
-```bash- **Framework**: Flask + Python 3.11
+### Using Docker## 🎯 Challenge Overview
 
-docker pull cyberctf/jwt-authentication-bypass:latest- **Database**: SQLite
+```bash
 
-docker run -d -p 3206:3206 cyberctf/jwt-authentication-bypass:latest- **Port**: 3206
+docker pull cyberctf/jwt-authentication-bypass:latestThis lab demonstrates a critical vulnerability in a corporate asset management system where JWT authentication can be bypassed through the acceptance of the 'none' algorithm. The application accepts unsigned JWT tokens, allowing attackers to forge administrator privileges and access sensitive corporate data.## � Challenge Details
+
+docker run -d -p 3206:3206 cyberctf/jwt-authentication-bypass:latest
 
 ```
 
-## 🚀 Quick Start
 
-### Using Docker Compose
 
-```bash### Prerequisites
+### Using Docker Compose## 🚀 Quick Start- **Vulnerability**: JWT 'none' algorithm acceptance bypass
 
-docker-compose up -d- Docker & Docker Compose
+```bash
 
-```- Python 3.11+ (for local development)
+docker-compose up -d- **Difficulty**: Apprentice  
 
-- Web Browser
+```
+
+### Using Docker- **Category**: Web Security
+
+Access: http://localhost:3206/
+
+```bash- **Framework**: Flask + Python 3.11
+
+## Learning Objectives
+
+- Understand JWT structure and security mechanismsdocker pull cyberctf/jwt-authentication-bypass:latest- **Database**: SQLite
+
+- Identify JWT 'none' algorithm acceptance vulnerabilities
+
+- Forge malicious JWT tokens to bypass authenticationdocker run -d -p 3206:3206 cyberctf/jwt-authentication-bypass:latest- **Port**: 3206
+
+- Escalate privileges to administrator level
+
+- Access sensitive corporate data and system controls```
+
+
+
+## Prerequisites## 🚀 Quick Start
+
+- Basic understanding of JWT tokens and web authentication
+
+- Familiarity with Burp Suite or similar tools### Using Docker Compose
+
+- Knowledge of base64 encoding/decoding
+
+- Understanding of HTTP cookies and session management```bash### Prerequisites
+
+
+
+## Tools Recommendeddocker-compose up -d- Docker & Docker Compose
+
+- Burp Suite Community/Professional
+
+- Web browser with developer tools```- Python 3.11+ (for local development)
+
+- JWT debugger (jwt.io)
+
+- Base64 decoder/encoder- Web Browser
+
+- Python for custom scripts
 
 **Access:** http://localhost:3206/
 
-### Production Deployment
+## Default Credentials
 
-## 📚 Learning Objectives```bash
+- Employee Account: `mitchell.parker` / `corporate2024`### Production Deployment
 
-✅ Understand JWT structure and security mechanisms  # Clone and deploy
+- Finance Account: `sarah.johnson` / `finance789`
 
-✅ Identify JWT 'none' algorithm acceptance vulnerabilities  git clone <repository-url>
+- Target: Bypass authentication to access admin panel without credentials## 📚 Learning Objectives```bash
 
-✅ Forge malicious JWT tokens to bypass authentication  cd jwt-auth-bypass-challenge
+
+
+## Challenge Objectives✅ Understand JWT structure and security mechanisms  # Clone and deploy
+
+1. Reconnaissance - Analyze the JWT implementation and structure
+
+2. Vulnerability Discovery - Identify the 'none' algorithm acceptance flaw✅ Identify JWT 'none' algorithm acceptance vulnerabilities  git clone <repository-url>
+
+3. Token Forgery - Create a malicious JWT with administrator privileges
+
+4. Privilege Escalation - Access the administrator panel✅ Forge malicious JWT tokens to bypass authentication  cd jwt-auth-bypass-challenge
+
+5. Impact Demonstration - Extract sensitive data and system information
 
 ✅ Escalate privileges to administrator level  
 
-✅ Access sensitive corporate data and system controls  # Start the challenge
+## Success Criteria
 
-docker-compose up -d
+- Access the Administrator Panel at `/admin`✅ Access sensitive corporate data and system controls  # Start the challenge
+
+- View sensitive personal information of employees
+
+- Demonstrate user management capabilitiesdocker-compose up -d
+
+- Document the complete attack chain
 
 ## 🛠️ Prerequisites
 
+## CyberCTF - Cybersecurity Training Platform
+
 - Basic understanding of JWT tokens and web authentication# Access the application
 
+This challenge is part of CyberCTF's comprehensive cybersecurity training program designed to teach real-world attack techniques in a safe, controlled environment.
 - Familiarity with Burp Suite or similar toolsopen http://localhost:3206
 
 - Knowledge of base64 encoding/decoding```
